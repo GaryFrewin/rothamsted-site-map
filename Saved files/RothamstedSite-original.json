@@ -1,0 +1,764 @@
+{
+	"name": "Homepage",
+	"children": [{
+			"name": "Top Menu",
+			"children": [{
+					"name": "News",
+					"children": [{
+						"value": 700,
+						"name": "GM Camelina Trial: Frequently asked questions"
+					}]
+				},
+				{
+					"name": "Events",
+					"children": [{
+							"name": "Event 1",
+							"value": 1000
+						},
+						{
+							"name": "Event 2",
+							"value": 1000
+						},
+						{
+							"name": "Event 3",
+							"value": 1000
+						},
+						{
+							"name": "Event 4",
+							"value": 1000
+						}
+					]
+				},
+				{
+					"name": "About",
+					"children": [{
+							"name": "Science Strategy",
+							"value": 1000
+						},
+						{
+							"name": "Our Values",
+							"children": [{
+									"name": "Flexible Working",
+									"value": 1000
+								},
+								{
+									"name": "Athena SWAN",
+									"value": 1000
+								},
+								{
+									"name": "Diversity Policy",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Diversity and Equality",
+							"value": 1000
+						},
+						{
+							"name": "Athena SWAN",
+							"value": 1000
+						},
+						{
+							"name": "National Capabilities",
+							"value": 1000
+						},
+						{
+							"name": "Collaboration and Innovation",
+							"value": 1000
+						},
+						{
+							"name": "Corporate Information and Funding",
+							"children": [{
+									"name": "Board of Directors",
+									"value": 1000
+								},
+								{
+									"name": "Annual Reports",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "History and Heritage",
+							"children": [{
+								"name": "A visual History of Rothamsted.pdf",
+								"value": 1000
+							}]
+						},
+						{
+							"name": "Environmental Management System",
+							"value": 1000
+						}
+					]
+				},
+				{
+					"name": "People",
+					"value": 1000
+				},
+				{
+					"name": "Careers",
+					"children": [{
+							"name": "Data Privacy.doc",
+							"value": 1000
+						},
+						{
+							"name": "Current Vacancies",
+							"value": 1000
+						},
+						{
+							"name": "Studentships",
+							"value": 1000
+						},
+						{
+							"name": "International Fellowships",
+							"value": 1000
+						},
+						{
+							"name": "Work Experience",
+							"value": 1000
+						},
+						{
+							"name": "Work Placements and Internships",
+							"value": 1000
+						},
+						{
+							"name": "Apprenticeships",
+							"children": [{
+								"name": "Apprentice life at Rothamsted",
+								"children": [{
+										"name": "Matthew Berridge",
+										"value": 1000
+									},
+									{
+										"name": "Alice Belasai",
+										"value": 1000
+									},
+									{
+										"name": "David Steele",
+										"value": 1000
+									},
+									{
+										"name": "Hannah Walpole",
+										"value": 1000
+									}
+								]
+							}]
+						},
+						{
+							"name": "Life at Rothamsted",
+							"value": 1000
+						},
+						{
+							"name": "Athena SWAN",
+							"value": 1000
+						},
+						{
+							"name": "Flexible Working",
+							"value": 1000
+						}
+					]
+				},
+				{
+					"name": "Contact",
+					"value": 1000
+				}
+			]
+		},
+		{
+			"name": "Main Menu",
+			"children": [{
+					"name": "Science",
+					"children": [{
+							"name": "Our Science",
+							"children": [{
+									"name": "Superior Crops",
+									"value": 1000
+								},
+								{
+									"name": "Securing Productivity",
+									"value": 1000
+								},
+								{
+									"name": "Future Agri-Food Systems",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Science Departments",
+							"children": [{
+									"name": "SAS",
+									"value": 1000
+								},
+								{
+									"name": "PS",
+									"value": 1000
+								},
+								{
+									"name": "CAS",
+									"value": 1000
+								},
+								{
+									"name": "BCP",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Our Scientists",
+							"value": 1000
+						},
+						{
+							"name": "Scientific Life for Students",
+							"children": [{
+									"name": "Sophia Iqbal",
+									"value": 1000
+								},
+								{
+									"name": "George Lund",
+									"value": 1000
+								},
+								{
+									"name": "Cassie Sims",
+									"value": 1000
+								},
+								{
+									"name": "Susana Silvestre",
+									"value": 1000
+								},
+								{
+									"name": "Megan Rafter",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Publications",
+							"value": 1000
+						},
+						{
+							"name": "National Capabilities",
+							"children": [{
+									"name": "North Wyke Farm Platform",
+									"children": [{
+											"name": "Hypothesis",
+											"value": 1000
+										},
+										{
+											"name": "Data Portal",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Insect Survey",
+									"value": 1000
+								},
+								{
+									"name": "Long Term Experiments",
+									"children": [{
+											"name": "Guide.pdf",
+											"value": 1000
+										},
+										{
+											"name": "Sample Archive",
+											"value": 1000
+										},
+										{
+											"name": "e-RA",
+											"value": 1000
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Impact",
+					"children": [{
+							"name": "Our Impact Overview",
+							"value": 1000
+						},
+						{
+							"name": "Impact Stories",
+							"value": 1000
+						},
+						{
+							"name": "Success Stories",
+							"value": 1000
+						},
+						{
+							"name": "Blogs",
+							"value": 1000
+						}
+					]
+				},
+				{
+					"name": "Reports",
+					"value": 1000
+				},
+				{
+					"name": "Engage With Us",
+					"children": [{
+							"name": "Business Engagement",
+							"children": [{
+									"name": "Engagement Opportunities",
+									"value": 1000
+								},
+								{
+									"name": "Impact Stories",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Innovation",
+							"children": [{
+									"name": "AgRIA",
+									"children": [{
+											"name": "AgRIA Short Leaps",
+											"value": 1000
+										},
+										{
+											"name": "FarmInn",
+											"value": 1000
+										},
+										{
+											"name": "IP",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Centres for Agricultural Innovation",
+									"children": [{
+											"name": "AgriMetrics",
+											"value": 1000
+										},
+										{
+											"name": "CHAP",
+											"value": 1000
+										},
+										{
+											"name": "CIEL",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "FarmInn",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Engagement Opportunities",
+							"children": [{
+									"name": "Andrew Spencer",
+									"value": 1000
+								},
+								{
+									"name": "Bianca Forte",
+									"value": 1000
+								},
+								{
+									"name": "Our Science",
+									"value": 1000
+								},
+								{
+									"name": "Donna Fellows",
+									"value": 1000
+								},
+								{
+									"name": "Knowledge Exchange",
+									"value": 1000
+								},
+								{
+									"name": "International",
+									"value": 1000
+								},
+								{
+									"name": "Business Engagement",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Global Partnerships",
+							"children": [{
+									"name": "China",
+									"children": [{
+											"name": "AgriTech in China",
+											"value": 1000
+										},
+										{
+											"name": "CSIA",
+											"value": 1000
+										},
+										{
+											"name": "CINAG",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "India",
+									"value": 1000
+								},
+								{
+									"name": "Brazil",
+									"value": 1000
+								},
+								{
+									"name": "Africa",
+									"value": 1000
+								},
+								{
+									"name": "Fellowship Scheme",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Engaging With Policy Makers",
+							"value": 1000
+						},
+						{
+							"name": "Knowledge Exchange",
+							"children": [{
+									"name": "Open Days (events)",
+									"value": 1000
+								},
+								{
+									"name": "Farming Innovatively? (CTA Mailto:)",
+									"value": 1000
+								},
+								{
+									"name": "Impact Stories",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Public Engagement",
+							"value": 1000
+						},
+						{
+							"name": "Rothamsted International",
+							"children": [{
+									"name": "About",
+									"children": [{
+										"name": "Case Studies",
+										"value": 1000
+									}]
+								},
+								{
+									"name": "Current Opportunities",
+									"children": [{
+											"name": "25th Anniversary Fellowships",
+											"value": 1000
+										},
+										{
+											"name": "Food Beacon Fellowships",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Support Us",
+									"value": 1000
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Resources",
+					"children": [{
+							"name": "Specialist Science Facilities",
+							"children": [{
+									"name": "Denis Lab",
+									"value": 1000
+								},
+								{
+									"name": "Harmonic Verticle Radar",
+									"value": 1000
+								},
+								{
+									"name": "Our Farms",
+									"children": [{
+										"name": "See our Farm Equipment",
+										"value": 1000
+									}]
+								},
+								{
+									"name": "Livestock and Farm Resources, North Wyke",
+									"value": 1000
+								},
+								{
+									"name": "Insectary",
+									"value": 1000
+								},
+								{
+									"name": "AFSIS Lab",
+									"value": 1000
+								},
+								{
+									"name": "Field Scanalyser",
+									"children": [{
+											"name": "Camera and Sensors",
+											"value": 1000
+										},
+										{
+											"name": "Publications",
+											"value": 1000
+										},
+										{
+											"name": "Videos",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Cereal Transformations",
+									"children": [{
+											"name": "Transformation Options.docx",
+											"value": 1000
+										},
+										{
+											"name": "Requirements for Transformations",
+											"value": 1000
+										},
+										{
+											"name": "Booking Form.xlsx",
+											"value": 1000
+										},
+										{
+											"name": "Publications",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Glasshouses and Controlled Environments",
+									"children": [{
+										"name": "Current Facilities.pdf",
+										"value": 1000
+									}]
+								}
+							]
+						},
+						{
+							"name": "Cross Cutting Capabilities",
+							"children": [{
+									"name": "Bioimaging",
+									"children": [{
+											"name": "Booking Form",
+											"value": 1000
+										},
+										{
+											"name": "Equipment",
+											"value": 1000
+										},
+										{
+											"name": "Downloads",
+											"value": 1000
+										},
+										{
+											"name": "Publications",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Metabolomics",
+									"children": [{
+											"name": "Equipment",
+											"value": 1000
+										},
+										{
+											"name": "Publications",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Analytical Chemistry",
+									"children": [{
+											"name": "Equipment",
+											"value": 1000
+										},
+										{
+											"name": "Services Offered",
+											"value": 1000
+										},
+										{
+											"name": "Harpenden Lab Brochure.pdf",
+											"value": 1000
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Library, Collections and Archive",
+							"children": [{
+									"name": "LIS",
+									"children": [{
+											"name": "Library Catalogue",
+											"value": 1000
+										},
+										{
+											"name": "Repository",
+											"value": 1000
+										},
+										{
+											"name": "Archives Catalogue",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Willow Collection",
+									"value": 1000
+								},
+								{
+									"name": "Sample Archive",
+									"children": [{
+										"name": "e-Ra",
+										"value": 1000
+									}]
+								}
+							]
+						},
+						{
+							"name": "Data Repositories, Models and Software",
+							"children": [{
+									"name": "Insect Bulletin",
+									"value": 1000
+								},
+								{
+									"name": "Phi-Base",
+									"value": 1000
+								},
+								{
+									"name": "Farm Platform Data Portal",
+									"value": 1000
+								},
+								{
+									"name": "E-Ra",
+									"value": 1000
+								},
+								{
+									"name": "ECN",
+									"children": [{
+										"name": "ECN Booklet.pdf",
+										"value": 1000
+									}]
+								},
+								{
+									"name": "Models and Analytical Tools",
+									"children": [{
+											"name": "Roth-C",
+											"value": 1000
+										},
+										{
+											"name": "RothLime",
+											"value": 1000
+										},
+										{
+											"name": "Motor",
+											"value": 1000
+										}
+									]
+								},
+								{
+									"name": "Sirius Wheat Sim",
+									"value": 1000
+								},
+								{
+									"name": "LARS-WG Weather Sim",
+									"value": 1000
+								}
+							]
+						},
+						{
+							"name": "Interactive Web based Tools",
+							"children": [{
+									"name": "FarmCrapApp",
+									"value": 1000
+								},
+								{
+									"name": "CropProtect",
+									"value": 1000
+								},
+								{
+									"name": "KnetMiner",
+									"value": 1000
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Body",
+			"children": [{
+					"name": "Latest Updates",
+					"value": 1000
+				},
+				{
+					"name": "Our Purpose",
+					"value": 1000
+				},
+				{
+					"name": "Our Science",
+					"value": 1000
+				},
+				{
+					"name": "Our Impacts",
+					"value": 1000
+				},
+				{
+					"name": "Engaging With Us",
+					"value": 1000
+				},
+				{
+					"name": "Our Values",
+					"value": 1000
+				},
+				{
+					"name": "Global Partnerships",
+					"value": 1000
+				},
+				{
+					"name": "Our Locations",
+					"value": 1000
+				}
+			]
+		},
+		{
+			"name": "Footer",
+			"children": [{
+					"name": "Disclaimer",
+					"value": 1000
+				},
+				{
+					"name": "Privacy and Cookies",
+					"value": 1000
+				},
+				{
+					"name": "Staff Information",
+					"value": 1000
+				},
+				{
+					"name": "SiteMap",
+					"value": 1000
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>rothamsted Site Editor</title>
+  <link rel="icon" href="logo.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="jquery.orgchart.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="top-button-container">
+<button id="btn-export-hier">Save</button>
+<button id="btn_expand">Expand all</button>
+<button id="btn_collapse">Collapse all</button>
+<button id="btn_show_content">Show Content</button>
+<button id="btn_hide_content">Hide Content</button>
+<label><input id="togglePan" type="checkbox" checked>Enable Pan</label>
+<label><input id="toggleZoom" type="checkbox" unchecked>Enable Zoom</label>
+<label><input id="btn-load-json" type="file" /></label>
+</div>
+	
+<div id="editor-title">Rothamsted Site Editor</div>
+	<p></p>
+<div id="chart-container"></div>
+
+<div id="detail-panel">
+
+	<!-- this details panel does not yet display all node details -->
+	<!-- and it doesn't have a way to update a node with the info somebody enters -->
+
+
+	<label>Page Name</label>
+	<p class="text-comments">View or edit the title of the selected node/webpage</p>
+	<input type="text" id="page-name">
+
+	<label>Original Page</label>
+	<p class="text-comments">If a page has been renamed, type the original page reference/name here</p>
+	<input type="text" id="original-page">
+	<label>URL</label>
+	<input type="text" id="page-url">
+	<a href="#" id="page-link" target="_blank">go there</a>
+	<label>Notes</label>
+	<p class="text-comments">Add notes about new content. Type 'Task' to ensure jobs can be found by the search feature</p>
+	<textarea type="text" id="page-notes"></textarea>
+	<label>Change colour</label>
+	<button type="button" id="btn-colour-one">science</button>
+	<button type="button" id="btn-colour-two">impact</button>
+	<button type="button" id="btn-colour-three">engage</button>
+	<button type="button" id="btn-colour-four">resources</button>
+	<button type="button" id="btn-colour-five">new</button>
+	<button type="button" id="btn-colour-six">default</button>
+	</div>
+	
+	
+	<!-- This edit panel along the bottom of the screen seems to work fine -->
+	
+	<div id="edit-panel" class="view-state">
+    <span id="chart-state-panel" class="radio-panel">
+      <input type="radio" name="chart-state" id="rd-view" value="view"><label for="rd-view">View</label>
+      <input type="radio" name="chart-state" id="rd-edit" value="edit" checked="true"><label for="rd-edit">Edit</label>
+    </span>
+    <label class="selected-node-group">selected page:</label>
+    <input type="text" id="selected-node" class="selected-node-group">
+    <label>new page:</label>
+    <ul id="new-nodelist">
+      <li><input type="text" class="new-node"></li>
+    </ul>
+    <i class="fa fa-plus-circle btn-inputs" id="btn-add-input"></i>
+    <i class="fa fa-minus-circle btn-inputs" id="btn-remove-input"></i>
+    <span id="node-type-panel" class="radio-panel">
+      <input type="radio" name="node-type" id="rd-parent" value="parent"><label for="rd-parent">Parent(root)</label>
+      <input type="radio" name="node-type" id="rd-child" value="children"><label for="rd-child">Child</label>
+      <input type="radio" name="node-type" id="rd-sibling" value="siblings"><label for="rd-sibling">Sibling</label>
+    </span>
+    <button type="button" id="btn-add-nodes">Add</button>
+    <button type="button" id="btn-delete-nodes">Delete</button>
+    <button type="button" id="btn-reset">Reset</button>
+		
+  <input type="text" id="key-word">
+  <button type="button" id="btn-filter-node">Search</button>
+
+  </div>
+
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="jquery.orgchart.js"></script>
+		<script type="text/javascript" src="https://cdn.rawgit.com/stefanpenner/es6-promise/master/dist/es6-promise.auto.min.js"></script>
+	<script type="text/javascript" src="html2canvas.min.js"></script>
+  <script type="text/javascript">
+   (function($){
+
+  $(function() {
+	  
+	  
+	  
+		/* Need to amend this to 
+		reference a json file on a local drive
+    	*/
+  $(function() {
+   var datasource = {
+		 "id": "n1",
+      "name": "Root Node",
+	  "original": "Some text here",
+	  "url": "https://www.rothamsted.ac.uk/",
+	"notes": "You can write notes here."
+    };
+
+	
+	  
+	  window.onbeforeunload = function() {
+    return "Are you sure you want to navigate away?";
+}
+	  
+	  var oc = $('#chart-container').orgchart();
+
+	$('#btn-load-json').change(function(event) {
+		var uploadedFile = event.target.files[0]; 
+
+		if (uploadedFile) {
+		        var readFile = new FileReader();
+		        readFile.onload = function(e) { 
+		            var contents = e.target.result;
+		            var json = JSON.parse(contents);
+			    datasource = json;
+			    refresh_chart();
+		        };
+        		readFile.readAsText(uploadedFile);
+		} else { 
+		        alert("Failed to load file");
+		}
+	});
+	  
+	  
+    var getId = function() {
+      return (new Date().getTime()) * 1000 + Math.floor(Math.random() * 1001);
+    };
+		  
+
+	function refresh_chart() {
+    oc.init({
+      'data' : datasource,
+      'chartClass': 'edit-state',
+      'exportButton': true,
+		'exportfilename': 'RothWebChart',
+		'direction': 'l2r',
+		'pan': true,
+		'draggable': true,
+      'parentNodeSymbol': 'fa-th-large',
+      'createNode': function($node, data) {
+        $node[0].id = getId();
+        $node[0].name = data.name;
+        $node[0].original = data.original;
+        $node[0].url = data.url;
+        $node[0].notes = data.notes;
+      }
+    });
+  }	 
+	  
+	  refresh_chart();
+	  
+	  $('#btn_expand').on('click', function() {
+	  var $temp = oc.$chart.find('.hidden').removeClass('hidden');
+      $temp[0].offsetWidth;
+      $temp.find('.slide-up').removeClass('slide-up');
+    });
+    
+    $('#btn_collapse').on('click', function() {
+      oc.hideChildren(oc.$chart.find('.node:first'));
+    });
+	  
+	  
+	  		
+			  $('#btn_show_content').on('click', function() {
+	
+				 oc.$chart.find('.content').removeClass('condensed');
+				 oc.$chart.find('.node').removeClass('shrink-box ');
+			  });			  
+	  
+	  		$('#btn_hide_content').on('click', function() {
+
+				 oc.$chart.find('.content').addClass('condensed');
+				 oc.$chart.find('.node').addClass('shrink-box ');
+			  });
+		
+	  
+	   
+    $('#togglePan').on('click', function() {
+      // of course, oc.setOptions({ 'pan': this.checked }); is also OK.
+      oc.setOptions('pan', this.checked);
+    });
+    
+    $('#toggleZoom').on('click', function() {
+      // of course, oc.setOptions({ 'zoom': this.checked }); is also OK.
+      oc.setOptions('zoom', this.checked);
+    });
+		
+	 $("#btn-export-hier").on("click", function() {
+		 
+		 
+      if (!$("pre").length) {
+        var hierarchy = oc.getHierarchy();
+        $("#btn-export-hier")
+         // .after("<pre>")
+          //.next()
+          ////.append(JSON.stringify(hierarchy, null, 2));
+      	}
+		 
+
+		var obj = hierarchy;
+		saveText( JSON.stringify(obj), "filename.json" );
+		
+		});
+	  
+	  function saveText(text, filename){
+  var a = document.createElement('a');
+  a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(text));
+  a.setAttribute('download', filename);
+  a.click()
+}
+	  
+	 var selectedNode;
+
+    oc.$chartContainer.on('click', '.node', function() {
+      selectedNode = $(this);
+	//update all the text fields in the 
+	//right panel with the selected node details
+      $('#selected-node').val(selectedNode.find('.title').text()).data('node', selectedNode);
+      $('#page-name').val(selectedNode.find('.title').text()).data('node', selectedNode);
+      $('#original-page').val(selectedNode.find('.content').text()).data('node', selectedNode);
+      $('#page-url').val(selectedNode.find('.url').text()).data('node', selectedNode);
+      $('#page-notes').val(selectedNode.find('.notes').text()).data('node', selectedNode);
+      //and uypdate the link
+	  $('#page-link').attr("href", $('#page-url').val());
+		
+			  $('#detail-panel input[type=\'text\'], #detail-panel textarea[type=\'text\']').on('change keyup paste mouseup', function() {
+    			// var input_selected_name = $('#page-name');
+				var oc_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				oc_node[0].name = $('#page-name')[0].value;
+				oc_node[0].original = $('#original-page')[0].value;
+				oc_node[0].url = $('#page-url')[0].value;
+				oc_node[0].notes = $('#page-notes')[0].value;
+				$('#page-link').attr("href", $('#page-url').val());
+
+				$('#selected-node').val($("#page-name").val());
+				selectedNode.find('.title').text( oc_node[0].name );  
+				selectedNode.find('.content').text(  oc_node[0].original );
+				selectedNode.find('.url').text(  oc_node[0].url );
+				selectedNode.find('.notes').text(  oc_node[0].notes );
+
+			  });
+		
+		
+		
+			  $('#btn-colour-one').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+				  selectedNode.addClass('science-colour');
+			  });
+		
+				$('#btn-colour-two').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+				  selectedNode.addClass('impact-colour');
+			  });				
+		
+				$('#btn-colour-three').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+				  selectedNode.addClass('engage-colour');
+			  });			
+		
+				$('#btn-colour-four').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+				  selectedNode.addClass('resources-colour');
+			  });				
+		
+				$('#btn-colour-five').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+				  selectedNode.addClass('new-colour');
+			  });				
+		
+				$('#btn-colour-six').on('click', function() {
+				 var ob_node = oc.$chart.find(`div#${$('div.node.focused')[0].id}`);
+				  selectedNode.removeClass('science-colour impact-colour engage-colour resources-colour new-colour');
+			  });
+		
+	});
+	  
+	  
+	  	/* This custom function
+		is supposed to update the node info in the json
+		It works, but has issues:
+			Only node attributes edited in the panel are exported to JSON, i.e existing details are not exported
+			
+			
+    	*/
+		
+
+	  
+
+
+    oc.$chartContainer.on('click', '.orgchart', function(event) {
+      if (!$(event.target).closest('.node').length) {
+        $('#selected-node').val('');
+      }
+    });
+
+    $('input[name="chart-state"]').on('click', function() {
+      $('.orgchart').toggleClass('edit-state', this.value !== 'view');
+      $('#edit-panel').toggleClass('edit-state', this.value === 'view');
+      if ($(this).val() === 'edit') {
+        $('.orgchart').find('tr').removeClass('hidden')
+          .find('td').removeClass('hidden')
+          .find('.node').removeClass('slide-up slide-down slide-right slide-left');
+      } else {
+        $('#btn-reset').trigger('click');
+      }
+    });
+
+    $('input[name="node-type"]').on('click', function() {
+      var $this = $(this);
+      if ($this.val() === 'parent') {
+        $('#edit-panel').addClass('edit-parent-node');
+        $('#new-nodelist').children(':gt(0)').remove();
+      } else {
+        $('#edit-panel').removeClass('edit-parent-node');
+      }
+    });
+
+    $('#btn-add-input').on('click', function() {
+      $('#new-nodelist').append('<li><input type="text" class="new-node"></li>');
+    });
+
+    $('#btn-remove-input').on('click', function() {
+      var inputs = $('#new-nodelist').children('li');
+      if (inputs.length > 1) {
+        inputs.last().remove();
+      }
+    });
+	  
+	  
+	
+
+    $('#btn-add-nodes').on('click', function() {
+      var $chartContainer = $('#chart-container');
+      var nodeVals = [];
+      $('#new-nodelist').find('.new-node').each(function(index, item) {
+        var validVal = item.value.trim();
+        if (validVal.length) {
+          nodeVals.push(validVal);
+        }
+      });
+      var $node = $('#selected-node').data('node');
+      if (!nodeVals.length) {
+        alert('Please input value for new node');
+        return;
+      }
+      var nodeType = $('input[name="node-type"]:checked');
+      if (!nodeType.length) {
+        alert('Please select a node type');
+        return;
+      }
+      if (nodeType.val() !== 'parent' && !$('.orgchart').length) {
+        alert('Please creat the root node firstly when you want to build up the orgchart from the scratch');
+        return;
+      }
+      if (nodeType.val() !== 'parent' && !$node) {
+        alert('Please select one node in orgchart');
+        return;
+      }
+      if (nodeType.val() === 'parent') {
+        if (!$chartContainer.children('.orgchart').length) {// if the original chart has been deleted
+          oc = $chartContainer.orgchart({
+            'data' : { 'name': nodeVals[0] },
+            'exportButton': true,
+            'exportFilename': 'RothWeb',
+            'parentNodeSymbol': 'fa-th-large',
+            'createNode': function($node, data) {
+              $node[0].id = getId();
+            }
+          });
+          oc.$chart.addClass('view-state');
+        } else {
+          oc.addParent($chartContainer.find('.node:first'), { 'name': nodeVals[0], 'id': getId() });
+        }
+      } else if (nodeType.val() === 'siblings') {
+        if ($node[0].id === oc.$chart.find('.node:first')[0].id) {
+          alert('You are not allowed to directly add sibling nodes to root node');
+          return;
+        }
+        oc.addSiblings($node, nodeVals.map(function (item) {
+            return { 'name': item, 'relationship': '110', 'id': getId() };
+          }));
+      } else {
+        var hasChild = $node.parent().attr('colspan') > 0 ? true : false;
+        if (!hasChild) {
+          var rel = nodeVals.length > 1 ? '110' : '100';
+          oc.addChildren($node, nodeVals.map(function (item) {
+              return { 'name': item, 'relationship': rel, 'id': getId() };
+            }));
+        } else {
+          oc.addSiblings($node.closest('tr').siblings('.nodes').find('.node:first'), nodeVals.map(function (item) {
+              return { 'name': item, 'relationship': '110', 'id': getId() };
+            }));
+        }
+      }
+    });
+
+    $('#btn-delete-nodes').on('click', function() {
+      var $node = $('#selected-node').data('node');
+      if (!$node) {
+        alert('Please select one node in orgchart');
+        return;
+      } else if ($node[0] === $('.orgchart').find('.node:first')[0]) {
+        if (!window.confirm('Are you sure you want to delete the whole chart?')) {
+          return;
+        }
+      }
+      oc.removeNodes($node);
+      $('#selected-node').val('').data('node', null);
+    });
+
+    $('#btn-reset').on('click', function() {
+      $('.orgchart').find('.focused').removeClass('focused');
+      $('#selected-node').val('');
+      $('#new-nodelist').find('input:first').val('').parent().siblings().remove();
+      $('#node-type-panel').find('input').prop('checked', false);
+    });
+
+  });
+	   
+	   
+	   function filterNodes(keyWord) {
+  if (!keyWord.length) {
+    window.alert("Please type key word firstly.");
+    return;
+  } else {
+    var $chart = $(".orgchart");
+    // disalbe the expand/collapse feture
+    $chart.addClass("noncollapsable");
+    // distinguish the matched nodes and the unmatched nodes according to the given key word
+    $chart
+      .find(".node")
+      .filter(function(index, node) {
+        return (
+          $(node)
+            .text()
+            .toLowerCase()
+            .indexOf(keyWord) > -1
+        );
+      })
+      .addClass("matched")
+      .closest("table")
+      .parents("table")
+      .find("tr:first")
+      .find(".node")
+      .addClass("retained");
+    // hide the unmatched nodes
+    $chart.find(".matched,.retained").each(function(index, node) {
+      $(node)
+        .removeClass("slide-up")
+        .closest(".nodes")
+        .removeClass("hidden")
+        .siblings(".lines")
+        .removeClass("hidden");
+      var $unmatched = $(node)
+        .closest("table")
+        .parent()
+        .siblings()
+        .find(".node:first:not(.matched,.retained)")
+        .closest("table")
+        .parent()
+        .addClass("hidden");
+      $unmatched
+        .parent()
+        .prev()
+        .children()
+        .slice(1, $unmatched.length * 2 + 1)
+        .addClass("hidden");
+    });
+    // hide the redundant descendant nodes of the matched nodes
+    $chart.find(".matched").each(function(index, node) {
+      if (
+        !$(node)
+          .closest("tr")
+          .siblings(":last")
+          .find(".matched").length
+      ) {
+        $(node)
+          .closest("tr")
+          .siblings()
+          .addClass("hidden");
+      }
+    });
+  }
+}
+
+function clearFilterResult() {
+  $(".orgchart")
+    .removeClass("noncollapsable")
+    .find(".node")
+    .removeClass("matched retained")
+    .end()
+    .find(".hidden")
+    .removeClass("hidden")
+    .end()
+    .find(".slide-up, .slide-left, .slide-right")
+    .removeClass("slide-up slide-right slide-left");
+}
+
+	    $("#btn-filter-node").on("click", function() {
+			      clearFilterResult();
+      filterNodes($("#key-word").val());
+    });
+	   
+
+	   $("#key-word").on("keyup", function(event) {
+      if (event.which === 13) {
+        filterNodes(this.value);
+      } else if (event.which === 8 && this.value.length === 0) {
+        clearFilterResult();
+      }
+    });
+	    }); 
+	   
+	   
+})(jQuery);
+	  
+
+
+  </script>
+  </body>
+</html>
