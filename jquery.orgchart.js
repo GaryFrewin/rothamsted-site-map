@@ -269,7 +269,7 @@
     zoomWheelHandler: function (e) {
       var oc = e.data.oc;
       e.preventDefault();
-      var newScale  = 1 + (e.originalEvent.deltaY > 0 ? -0.2 : 0.2);
+      var newScale  = 1 + (e.originalEvent.deltaY > 0 ? -0.02 : 0.02);
       oc.setChartScale(oc.$chart, newScale);
     },
     //
